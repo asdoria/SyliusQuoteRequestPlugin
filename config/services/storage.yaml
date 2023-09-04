@@ -1,0 +1,8 @@
+services:
+    asdoria_quote_request.storage.quote_session:
+      class: Asdoria\SyliusQuoteRequestPlugin\Storage\QuoteSessionStorage
+      public: true
+      arguments:
+        $requestStack: '@request_stack'
+        $sessionKeyName: '_sylius.quote'
+        $orderRepository: '@sylius.repository.order'

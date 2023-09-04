@@ -1,0 +1,5 @@
+asdoria_quote_request_shop_index:
+      path: /quote
+      methods: [GET, POST]
+      defaults:
+        _controller: Asdoria\SyliusQuoteRequestPlugin\Shop\Controller\Shop\QuoteController

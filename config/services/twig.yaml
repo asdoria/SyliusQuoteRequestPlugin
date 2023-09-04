@@ -1,0 +1,6 @@
+services:
+    Asdoria\SyliusQuoteRequestPlugin\Twig\QuoteExtension:
+        arguments:
+            $orderRepository: '@sylius.repository.order'
+        tags:
+            - { name: twig.extension }
