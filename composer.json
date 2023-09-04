@@ -5,7 +5,7 @@
     "keywords": [
         "asdoria",
         "sylius",
-        "sylius-plugin",
+        "sylius-plugin"
     ],
     "authors": [
         {
@@ -16,7 +16,7 @@
     "license": "MIT",
     "require": {
         "php": "^8.0",
-        "asdoria/sylius-quick-shopping-plugin": "^0.1",
+        "asdoria/sylius-quick-shopping-plugin": "^0.1"
     },
     "require-dev": {
         "behat/behat": "^3.6.1",
