@@ -1,5 +1,5 @@
 {
-    "name": "asdoria/sylius-quick-shopping-plugin",
+    "name": "asdoria/sylius-quote-request-plugin",
     "type": "sylius-plugin",
     "description": "Generates quote requests in sylius.",
     "keywords": [
