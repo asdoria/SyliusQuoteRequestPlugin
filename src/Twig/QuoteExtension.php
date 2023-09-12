@@ -9,10 +9,10 @@ use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
 /**
- * Class OrderExtension
- * @package App\Twig
+ * Class QuoteExtension
+ * @package Asdoria\SyliusQuoteRequestPlugin\Twig
  *
- * @author  Hugo Duval <hugo.duval@asdoria.com>
+ * @author  Philippe Vesin <pve.asdoria@gmail.com>
  */
 class QuoteExtension extends AbstractExtension
 {

@@ -12,9 +12,9 @@
 
 <div style="max-width: 75%; height: auto; margin: auto">
 
-![Add to Cart](doc/addtocart.gif)
+![Add to Cart](doc/addtoquote.gif)
 
-![Your shopping](doc/yourshopping.png)
+![Your shopping](doc/yourquote.png)
 
 </div>
 
@@ -81,11 +81,11 @@ imports:
 
 ## Demo
 
-You can try the QuickShopping plugin online by following this link: [here!](https://demo-sylius.asdoria.fr/en_US/quick-shopping).
+You can try the QuickShopping plugin online by following this link: [here!](https://demo-sylius.asdoria.fr/en_US/quotation).
 
 Note that we have developed several other open source plugins for Sylius, whose demos and documentation are listed on the [following page](https://asdoria.github.io/).
 
 ## Usage
 
-1. In the shop office, go to /en_US/quick-shopping route.
+1. In the shop office, go to /en_US/quotation route.
 

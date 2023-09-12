@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Asdoria\SyliusQuoteRequestPlugin\Storage;
 
-use App\Model\Order\OrderInterface;
 use Sylius\Bundle\CoreBundle\Provider\SessionProvider;
 use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Symfony\Component\HttpFoundation\Exception\SessionNotFoundException;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -29,7 +29,7 @@ class QuoteSessionStorage implements QuoteSessionStorageInterface
     public function hasForChannel(ChannelInterface $channel): bool
     {
         try {
-            return SessionProvider::getSession($this->requestStack)->has($this->getQuoteKeyName($channel));
+            return !empty(SessionProvider::getSession($this->requestStack)->get($this->getQuoteKeyName($channel)));
         } catch (SessionNotFoundException) {
             return false;
         }
@@ -49,10 +49,9 @@ class QuoteSessionStorage implements QuoteSessionStorageInterface
         return null;
     }
 
-    public function setForChannel(ChannelInterface $channel, OrderInterface $cart): void
+    public function setForChannel(ChannelInterface $channel, OrderInterface $quote): void
     {
-        $cart->setState(OrderInterface::STATE_QUOTE);
-        SessionProvider::getSession($this->requestStack)->set($this->getQuoteKeyName($channel), $cart->getTokenValue());
+        SessionProvider::getSession($this->requestStack)->set($this->getQuoteKeyName($channel), $quote->getTokenValue());
     }
 
     public function removeForChannel(ChannelInterface $channel): void

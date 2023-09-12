@@ -1,0 +1,19 @@
+services:
+    asdoria_quote_request.context.quote.new:
+        class: Asdoria\SyliusQuoteRequestPlugin\Context\QuoteContext
+        arguments:
+            $cartFactory: '@sylius.factory.order'
+
+    asdoria_quote_request.context.quote.new_shop_based:
+        class: Asdoria\SyliusQuoteRequestPlugin\Context\ShopBasedQuoteContext
+        decorates: asdoria_quote_request.context.quote.new
+        arguments:
+            $quoteContext: '@asdoria_quote_request.context.quote.new_shop_based.inner'
+            $shopperContext: '@sylius.context.shopper'
+            $quoteTokenAssigner: '@Asdoria\SyliusQuoteRequestPlugin\TokenAssigner\QuoteTokenAssignerInterface'
+        calls:
+            - [ setQuoteSessionStorage, ['@asdoria_quote_request.storage.quote_session']]
+
+
+    asdoria_quote_request.context.quote:
+        alias: asdoria_quote_request.context.quote.new_shop_based

@@ -1,0 +1,28 @@
+parameters:
+    sylius.form.type.add_to_quote.validation_groups: ['sylius']
+    sylius.form.type.bulk_add_to_quote.validation_groups: ['sylius']
+services:
+    asdoria_quote_request.form.type.add_to_quote:
+        class: Asdoria\SyliusQuoteRequestPlugin\Form\Type\AddToQuoteType
+        arguments:
+            $dataClass: 'Asdoria\SyliusQuoteRequestPlugin\Controller\Shop\AddToQuoteCommand'
+            $validationGroups: '%sylius.form.type.add_to_quote.validation_groups%'
+        tags:
+            - { name: form.type }
+                
+    Asdoria\SyliusQuoteRequestPlugin\Form\Type\BulkAddToQuoteType:
+        arguments:
+            $cartContext: '@asdoria_quote_request.context.quote'
+            $bulkAddToCartCommandFactory: '@Asdoria\SyliusQuoteRequestPlugin\Factory\BulkAddToQuoteCommandFactory'
+            $dataClass: 'Asdoria\SyliusQuickShoppingPlugin\Controller\Shop\BulkAddToCartCommand'
+            $validationGroups: '%sylius.form.type.bulk_add_to_quote.validation_groups%'
+        tags:
+            - { name: form.type }
+
+    Asdoria\SyliusQuoteRequestPlugin\Form\Type\BulkAddToQuoteItemType:
+        arguments:
+            $dataClass: 'Asdoria\SyliusQuoteRequestPlugin\Controller\Shop\AddToQuoteCommand'
+            $validationGroups: '%sylius.form.type.add_to_quote.validation_groups%'
+        tags:
+            - { name: form.type }
+

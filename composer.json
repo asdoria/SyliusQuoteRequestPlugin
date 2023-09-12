@@ -73,11 +73,6 @@
         }
     },
     "autoload-dev": {
-        "psr-4": {
-            "Tests\\Asdoria\\SyliusQuoteRequestPlugin\\": "tests/"
-        }
-    },
-    "autoload-dev": {
         "classmap": [
             "tests/Application/Kernel.php"
         ]

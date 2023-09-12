@@ -1,9 +1,8 @@
 <?php
 declare(strict_types=1);
 
-namespace App\EmailManager;
+namespace Asdoria\SyliusQuoteRequestPlugin\EmailManager;
 
-use App\Storage\QuoteSessionStorageInterface;
 use Asdoria\SyliusQuoteRequestPlugin\Traits\QuoteSessionStorageTrait;
 use Sylius\Bundle\CoreBundle\Mailer\Emails;
 use Sylius\Bundle\ShopBundle\EmailManager\ContactEmailManagerInterface;
@@ -14,10 +13,10 @@ use Sylius\Component\Mailer\Sender\SenderInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
- * Class MailingResourceSendListener
- * @package App\EmailManager
+ * Class ContactEmailManager
+ * @package Asdoria\SyliusQuoteRequestPlugin\EmailManager
  *
- * @author  Hugo Duval <hugo.duval@asdoria.com>
+ * @author  Philippe Vesin <pve.asdoria@gmail.com>
  */
 class ContactEmailManager implements ContactEmailManagerInterface
 {
@@ -44,8 +43,8 @@ class ContactEmailManager implements ContactEmailManagerInterface
     ): void
     {
         $this->inner->sendContactRequest($data);
+        
         $this->quoteSessionStorage->removeForChannel($channel);
-    
     }
- 
+
 }

@@ -1,0 +1,10 @@
+services:
+    Asdoria\SyliusQuoteRequestPlugin\Factory\AddToQuoteCommandFactory:
+
+    asdoria_quote_request.factory.quote_item:
+        parent: sylius.factory.cart_item
+    
+    Asdoria\SyliusQuoteRequestPlugin\Factory\BulkAddToQuoteCommandFactory:
+        arguments:
+            $inner: '@Asdoria\SyliusQuickShoppingPlugin\Factory\BulkAddToCartCommandFactory'
+            $addToCartCommandFactory: '@Asdoria\SyliusQuoteRequestPlugin\Factory\AddToQuoteCommandFactory'

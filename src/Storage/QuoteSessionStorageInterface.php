@@ -5,10 +5,11 @@ declare(strict_types=1);
 namespace Asdoria\SyliusQuoteRequestPlugin\Storage;
 
 use Sylius\Component\Core\Model\ChannelInterface;
-use App\Model\Order\OrderInterface;
+use Sylius\Component\Core\Model\OrderInterface;
+
 /**
- * Class QuoteSessionStorageInterface
- * @package App\Storage
+ * Interface QuoteSessionStorageInterface
+ * @package Asdoria\SyliusQuoteRequestPlugin\Storage
  *
  * @author  Philippe Vesin <pve.asdoria@gmail.com>
  */

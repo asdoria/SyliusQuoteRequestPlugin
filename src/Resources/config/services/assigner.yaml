@@ -1,0 +1,8 @@
+services:
+    asdoria_quote_request.unique_id_based_quote_token_assigner:
+        class: Asdoria\SyliusQuoteRequestPlugin\TokenAssigner\UniqueIdBasedQuoteTokenAssigner
+        arguments:
+            $generator: '@sylius.random_generator'
+
+    Asdoria\SyliusQuoteRequestPlugin\TokenAssigner\QuoteTokenAssignerInterface:
+        alias: asdoria_quote_request.unique_id_based_quote_token_assigner

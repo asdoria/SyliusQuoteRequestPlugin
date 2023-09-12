@@ -3,9 +3,9 @@ const path = require('path');
 const fs = require('fs');
 
 const basePath = path.resolve(__dirname, './');
-const assets_path = path.join(basePath, './private');
-const output_path = path.join(basePath, './public');
-const public_path = 'bundles/asdoriasyliusquickshoppingplugin';
+const assets_path = path.join(basePath, './src/Resources/private');
+const output_path = path.join(basePath, './src/Resources/public');
+const public_path = 'bundles/asdoriasyliusquoterequestplugin';
 const js_path = path.join(assets_path, './js');
 const isProduction = Encore.isProduction();
 
@@ -19,7 +19,10 @@ Encore
   .setPublicPath('/' + public_path)
   .setManifestKeyPrefix(public_path)
   .addEntry('shop-quote-request', [
-    path.join(js_path, './shop.js'),
+    path.join(js_path, './shop-quote-request.js'),
+  ])
+  .addEntry('shop-add-to-quote', [
+    path.join(js_path, './shop-add-to-quote.js'),
   ])
 
   // allow sass/scss files to be processed

@@ -1,0 +1,43 @@
+{% extends '@SyliusShop/layout.html.twig' %}
+
+{%- block title %}{{ 'asdoria_quote_request.ui.shop.title'|trans }}{% endblock -%}
+
+{% block robots %}
+    <meta name="robots" content="none">
+{% endblock %}
+
+{% block content %}
+    {% if form is defined %}
+        {% form_theme form '@AsdoriaSyliusQuoteRequestPlugin/Shop/Form/add_to_quote_theme.html.twig' %}
+    {% endif %}
+    <h1 class="ui monster section dividing header">
+        {{ 'asdoria_quote_request.ui.shop.header'|trans }}
+        <div class="sub header">
+            {{ 'asdoria_quote_request.ui.shop.sub_header' |trans }}
+        </div>
+    </h1>
+    <div class="ui segment">
+        {{ form_start(form, {'action': path('asdoria_shop_quote_request_index'), 'attr': {'id': 'asdoria-bulk-adding-to-quote', 'class': 'ui loadable form', 'novalidate': 'novalidate', 'data-redirect': path('sylius_shop_cart_summary')}}) }}
+        {{ form_errors(form) }}
+        {{ form_row(form.cartItems) }}
+
+        <div class="ui buttons">
+            <button type="submit" class="ui huge icon labeled button primary" {{ sylius_test_html_attribute('add-to-quote-button') }}>
+                <i class="check icon"></i> {{ 'asdoria_quote_request.ui.shop.save_my_quote'|trans }}
+            </button>
+            <div class="or" data-text="ou"></div>
+            {% set redirectTo = path('sylius_shop_contact_request') %}
+            <button type="submit" formaction="{{ path('asdoria_shop_quote_request_index', {'_redirect' : redirectTo}) }}" class="ui huge icon labeled button" {{ sylius_test_html_attribute('confirm-my-quote-button') }}>
+                <i class="share square icon"></i> {{ 'asdoria_quote_request.ui.shop.confirm_my_quote'|trans }}
+            </button>
+        </div>
+
+        {{ form_row(form._token) }}
+        {{ form_end(form, {'render_rest': false}) }}
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ sylius_template_event('asdoria.shop.index_quote_request.javascripts') }}
+{% endblock %}

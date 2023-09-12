@@ -1,0 +1,33 @@
+parameters:
+    asdoria_quote_request.form.type.order_item.validation_groups: ['add-to-quote']
+services:
+    Asdoria\SyliusQuoteRequestPlugin\Controller\Shop\QuoteController:
+        public: true
+        arguments:
+            $twig: '@twig'
+            $formFactory: '@form.factory'
+            $bulkAddToCartCommandFactory: '@Asdoria\SyliusQuoteRequestPlugin\Factory\BulkAddToQuoteCommandFactory'
+            $validator: '@validator'
+            $urlGenerator: '@sylius.router.checkout_state'
+            $orderModifier: '@sylius.order_modifier'
+            $cartManager: '@sylius.manager.order'
+            $validationGroups: '%asdoria_quote_request.form.type.order_item.validation_groups%'
+        calls:
+            - [ setQuoteContext, ['@asdoria_quote_request.context.quote']]
+                
+    Asdoria\SyliusQuoteRequestPlugin\Controller\Shop\AddToQuoteController:
+        public: true
+        arguments:
+            $quoteItemFactory: '@asdoria_quote_request.factory.quote_item'
+            $productRepository: '@sylius.repository.product'
+            $quantityModifier: '@sylius.order_item_quantity_modifier'
+            $orderModifier: '@sylius.order_modifier'
+            $formFactory: '@form.factory'
+            $quoteManager: '@sylius.manager.order'
+            $restViewHandler: '@fos_rest.view_handler'
+            $validationGroups: '%asdoria_quote_request.form.type.order_item.validation_groups%'
+            $validator: '@validator'
+        calls:
+            - [ setAddToQuoteCommandFactory, ['@Asdoria\SyliusQuoteRequestPlugin\Factory\AddToQuoteCommandFactory']]
+            - [ setQuoteContext, ['@asdoria_quote_request.context.quote']]
+            - [ setCsrfTokenManager, ['@security.csrf.token_manager']]

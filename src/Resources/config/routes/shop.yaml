@@ -1,0 +1,9 @@
+asdoria_shop_quote_request_ajax:
+    resource: "shop/ajax.yaml"
+    prefix: /ajax
+    
+asdoria_shop_quote_request_index:
+      path: /
+      methods: [GET, POST]
+      defaults:
+        _controller: Asdoria\SyliusQuoteRequestPlugin\Controller\Shop\QuoteController
