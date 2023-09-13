@@ -11,6 +11,12 @@ asdoria_quote_request:
             confirm_my_quote: Validate my quote
             see_detail: See details
             contact_header: Your quotation
-    emails:
+    email:
         contact_quote_request:
+            content: Content
+            subject: Your quote request has been trans
+        admin_quote_request:
+            content: Content
             subject: A request for quotation has been sent to you
+            message_from: Message from
+            number: A quote with reference %reference% has been sent to you

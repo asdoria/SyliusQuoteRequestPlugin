@@ -2,15 +2,21 @@ asdoria_quote_request:
     ui:
         shop:
             or: ou
-            title: Quote
-            header: Quote Request
-            sub_header: Add multiple products to quote
-            add_to_quote: Add To Quote
-            quote_add_item: Item has been added to quote
+            title: Devis
+            header: Demande de devis
+            sub_header: Ajouter plusieurs produits à un devis
+            add_to_quote: Ajouter au devis
+            quote_add_item: L'article a été ajouté au devis
             save_my_quote: Register my Quote
-            confirm_my_quote: Validate my quote
-            see_detail: See details
-            contact_header: Your quotation
-    emails:
+            confirm_my_quote: Enregistrer mon devis
+            see_detail: Voir les détails
+            contact_header: Votre devis
+    email:
         contact_quote_request:
-            subject: A request for quotation has been sent to you
+            content: Contenu
+            subject: Votre demande de devis a été transmise
+        admin_quote_request:
+            content: Contenu
+            subject: Une demande de devis vous a été envoyée
+            message_from: Message de
+            number: Un devis avec la référence %reference% vous a été envoyé
