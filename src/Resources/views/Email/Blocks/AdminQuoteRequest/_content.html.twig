@@ -8,10 +8,7 @@
         <strong>{{ 'asdoria_quote_request.email.admin_quote_request.content'|trans({}, null, localeCode) }}:</strong>
     </div>
     <div>{{ data.message|nl2br }}</div>
-
-    <div style="border: 1px solid rgba(34,36,38,.1);padding: 1.8em;position: relative;background: #fff;margin: 1rem 0;border-radius: 0.28571429rem;width: 100%;">
-        <h4 class="ui header"> {{ 'asdoria_quote_request.email.admin_quote_request.number'|trans({'%reference%': quote.tokenValue}) }}</h4>
-    </div>
+    <h4 class="ui header"> {{ 'asdoria_quote_request.email.admin_quote_request.number'|trans({'%reference%': quote.tokenValue}) }}</h4>
     <table class="ui celled table" style="
     width: 100%;
     background: #fff;
