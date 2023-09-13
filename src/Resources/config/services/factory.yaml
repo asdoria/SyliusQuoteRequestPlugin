@@ -8,3 +8,9 @@ services:
         arguments:
             $inner: '@Asdoria\SyliusQuickShoppingPlugin\Factory\BulkAddToCartCommandFactory'
             $addToCartCommandFactory: '@Asdoria\SyliusQuoteRequestPlugin\Factory\AddToQuoteCommandFactory'
+
+    Asdoria\SyliusQuoteRequestPlugin\Factory\CustomerAfterQuoteRequestFactory:
+        arguments:
+            $customerRepository: '@sylius.repository.customer'
+            $canonicalizer: '@sylius.canonicalizer'
+            $customerFactory: '@sylius.factory.customer'

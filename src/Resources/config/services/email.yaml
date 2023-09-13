@@ -1,7 +1,7 @@
 services:
-    Asdoria\SyliusQuoteRequestPlugin\EmailManager\ContactEmailManager:
+    asdoria_quote_request.email_manager.contact:
+        class: Asdoria\SyliusQuoteRequestPlugin\EmailManager\ContactEmailManager
         decorates: sylius.email_manager.contact
         arguments:
-            $inner: "@Asdoria\\SyliusQuoteRequestPlugin\\EmailManager\\ContactEmailManager.inner"
-        calls:
-            - [ setQuoteSessionStorage, ['@asdoria_quote_request.storage.quote_session']]
+            $inner: "@asdoria_quote_request.email_manager.contact.inner"
+            $eventDispatcher: "@event_dispatcher"

@@ -40,6 +40,6 @@ class QuoteExtension extends AbstractExtension
      */
     public function getQuote(string $tokenValue): ?OrderInterface
     {
-        return $this->orderRepository->findOneBy(['tokenValue' => $tokenValue, 'state' => Order::STATE_CART]);
+        return $this->orderRepository->findOneByTokenValue($tokenValue);
     }
 }

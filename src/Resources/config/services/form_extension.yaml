@@ -1,0 +1,7 @@
+services:
+    asdoria_quote_request.form_extension.contact:
+        class: Asdoria\SyliusQuoteRequestPlugin\Form\Extension\ContactTypeExtension
+        tags:
+            - { name: form.type_extension, extended_type: Sylius\Bundle\CoreBundle\Form\Type\ContactType }
+        calls:
+            - [ setQuoteContext, ['@asdoria_quote_request.context.quote']]

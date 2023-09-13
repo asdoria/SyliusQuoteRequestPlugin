@@ -9,3 +9,8 @@ asdoria_quote_request:
             quote_add_item: Item has been added to quote
             save_my_quote: Register my Quote
             confirm_my_quote: Validate my quote
+            see_detail: See details
+            contact_header: Your quotation
+    emails:
+        contact_quote_request:
+            subject: A request for quotation has been sent to you

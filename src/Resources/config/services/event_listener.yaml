@@ -1,0 +1,12 @@
+services:
+    Asdoria\SyliusQuoteRequestPlugin\EventListener\QuoteRequestListener:
+        arguments:
+            $emailSender: "@sylius.email_sender"
+            $customerAfterQuoteRequestFactory: "@Asdoria\\SyliusQuoteRequestPlugin\\Factory\\CustomerAfterQuoteRequestFactory"
+            $entityManager: "@doctrine.orm.entity_manager"
+            $localeContext: "@sylius.context.locale"
+        calls:
+            - [ setQuoteContext, ["@asdoria_quote_request.context.quote"]]
+            - [ setLogger, ["@logger"]]
+        tags:
+            - { name: kernel.event_listener, event: 'asdoria_quote_request.contact_email_manager.pre_send' , method: processQuoteRequest }

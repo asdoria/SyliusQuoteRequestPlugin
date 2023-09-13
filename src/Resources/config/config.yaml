@@ -17,6 +17,24 @@ sylius_ui:
                 quote_request:
                     template: "@AsdoriaSyliusQuoteRequestPlugin/Shop/_javascripts.html.twig"
                     priority: 5
+        sylius.shop.contact.request.form:
+            blocks:
+                quote_request:
+                    template: "@AsdoriaSyliusQuoteRequestPlugin/Shop/Contact/_quote.html.twig"
+                    priority: 5
 twig:
     globals:
-        quote_storage: '@asdoria_quote_request.storage.quote_session'
+        quoteContext: '@asdoria_quote_request.context.quote'
+
+
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius_mailer:
+    emails:
+        contact_quote_request:
+            subject: asdoria_quote_request.email.contact_quote_request.subject
+            template: "@AsdoriaSyliusQuoteRequestPlugin/Email/contactQuoteRequest.html.twig"
+        admin_quote_request:
+            subject: asdoria_quote_request.email.admin_quote_request.subject
+            template: "@AsdoriaSyliusQuoteRequestPlugin/Email/adminQuoteRequest.html.twig"

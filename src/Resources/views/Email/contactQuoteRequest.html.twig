@@ -1,0 +1,9 @@
+{% extends '@SyliusCore/Email/layout.html.twig' %}
+
+{% block subject %}
+    {% include '@AsdoriaSyliusQuoteRequestPlugin/Email/Blocks/ContactQuoteRequest/_subject.html.twig' %}
+{% endblock %}
+
+{% block content %}
+    {% include '@AsdoriaSyliusQuoteRequestPlugin/Email/Blocks/ContactQuoteRequest/_content.html.twig' %}
+{% endblock %}

@@ -6,14 +6,9 @@ namespace Asdoria\SyliusQuoteRequestPlugin\Controller\Shop;
 
 use Asdoria\SyliusQuickShoppingPlugin\Controller\Shop\BulkAddToCartCommandInterface;
 use Asdoria\SyliusQuickShoppingPlugin\Controller\Shop\QuickShoppingController;
-use Asdoria\SyliusQuickShoppingPlugin\Form\Type\BulkAddToCartType;
 use Asdoria\SyliusQuoteRequestPlugin\Factory\Model\BulkAddToQuoteCommandFactoryInterface;
 use Asdoria\SyliusQuoteRequestPlugin\Form\Type\BulkAddToQuoteType;
-use Asdoria\SyliusQuoteRequestPlugin\Traits\ChannelContextTrait;
 use Asdoria\SyliusQuoteRequestPlugin\Traits\QuoteContextTrait;
-use Asdoria\SyliusQuoteRequestPlugin\Traits\QuoteSessionStorageTrait;
-use Sylius\Component\Core\Model\OrderInterface;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -32,6 +27,7 @@ use Twig\Error\SyntaxError;
 class QuoteController extends QuickShoppingController
 {
     use QuoteContextTrait;
+
     /**
      * @param Request $request
      *
@@ -46,8 +42,8 @@ class QuoteController extends QuickShoppingController
             throw new \InvalidArgumentException('Invalid service bulkAddToQuoteCommandFactory');
         }
 
-        $quote                 = $this->getQuoteContext()->getQuote();
-        
+        $quote = $this->getQuoteContext()->getQuote();
+
         $bulkAddToQuoteCommand = $this->bulkAddToCartCommandFactory->createWithQuote($quote);
 
         $form = $this->formFactory->create(
@@ -58,7 +54,12 @@ class QuoteController extends QuickShoppingController
         if ($request->isMethod('POST') && $form->handleRequest($request)->isValid() && $form->isSubmitted()) {
             /** @var BulkAddToCartCommandInterface $bulkAddToQuoteCommand */
             $bulkAddToQuoteCommand = $form->getData();
-            $quote = $bulkAddToQuoteCommand->getCart();
+            $quote                 = $bulkAddToQuoteCommand->getCart();
+
+            foreach ($quote->getItems() as $orderItem) {
+                $this->orderModifier->removeFromOrder($quote, $orderItem);
+            }
+
             foreach ($form->get('cartItems') as $childForm) {
                 $addToQuoteCommand = $childForm->getData();
                 $errors            = $this->getCartItemErrors($addToQuoteCommand->getCartItem());
@@ -85,7 +86,7 @@ class QuoteController extends QuickShoppingController
         return new Response(
             $this->twig->render('@AsdoriaSyliusQuoteRequestPlugin/Shop/Quote/index.html.twig',
                 [
-                    'form' => $form->createView(),
+                    'form'   => $form->createView(),
                     'errors' => $form->getErrors(true, true)
                 ]
             )

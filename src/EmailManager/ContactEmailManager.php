@@ -3,14 +3,11 @@ declare(strict_types=1);
 
 namespace Asdoria\SyliusQuoteRequestPlugin\EmailManager;
 
-use Asdoria\SyliusQuoteRequestPlugin\Traits\QuoteSessionStorageTrait;
-use Sylius\Bundle\CoreBundle\Mailer\Emails;
+use Asdoria\SyliusQuoteRequestPlugin\Event\QuoteRequestEvent;
+use Asdoria\SyliusQuoteRequestPlugin\Event\QuoteRequestEventInterface;
+use Psr\EventDispatcher\EventDispatcherInterface;
 use Sylius\Bundle\ShopBundle\EmailManager\ContactEmailManagerInterface;
-use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
-use Sylius\Component\Locale\Context\LocaleContextInterface;
-use Sylius\Component\Mailer\Sender\SenderInterface;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
  * Class ContactEmailManager
@@ -20,9 +17,9 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
  */
 class ContactEmailManager implements ContactEmailManagerInterface
 {
-    use QuoteSessionStorageTrait;
     public function __construct(
-        protected ContactEmailManagerInterface $inner
+        protected ContactEmailManagerInterface $inner,
+        protected EventDispatcherInterface $eventDispatcher
     )
     {
     }
@@ -42,9 +39,14 @@ class ContactEmailManager implements ContactEmailManagerInterface
         ?string           $localeCode = null,
     ): void
     {
-        $this->inner->sendContactRequest($data);
-        
-        $this->quoteSessionStorage->removeForChannel($channel);
-    }
+        /** @var QuoteRequestEventInterface $event */
+        $event = $this->eventDispatcher->dispatch(
+            new QuoteRequestEvent($data, $recipients),
+            'asdoria_quote_request.contact_email_manager.pre_send'
+        );
 
+        if (!$event->isHasSent()){
+            $this->inner->sendContactRequest($data, $recipients, $channel, $localeCode);
+        }
+    }
 }

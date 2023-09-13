@@ -1,0 +1,50 @@
+{% import '@AsdoriaSyliusQuoteRequestPlugin/Email/Macros/_table.html.twig' as table %}
+<div style="text-align: left;">
+    <div style="color: #1abb9c;">
+        <strong>{{ 'asdoria_quote_request.email.contact_quote_request.number'|trans({}, null, localeCode) }}:</strong>
+    </div>
+    <div style="margin-bottom: 20px;">{{ quote.tokenValue }}</div>
+    <div style="color: #1abb9c;">
+        <strong>{{ 'asdoria_quote_request.email.contact_quote_request.content'|trans({}, null, localeCode) }}:</strong>
+    </div>
+    <div>{{ data.message|nl2br }}</div>
+    <div class="ui segments">
+        <div style="border: 1px solid rgba(34,36,38,.1);padding: 1.8em;position: relative;background: #fff;margin: 1rem 0;border-radius: 0.28571429rem;width: 100%;">
+            <h4 class="ui header"> {{ 'sylius.ui.details'|trans() }}</h4>
+        </div>
+        <div style="border: 1px solid rgba(34,36,38,.1);padding: 1.8em;position: relative;background: #fff;margin: 1rem 0;border-radius: 0.28571429rem;width: 100%;">
+            <table class="ui celled table" style="
+            width: 100%;
+            background: #fff;
+            margin: 1em 0;
+            border: 1px solid rgba(34,36,38,.15);
+            -webkit-box-shadow: none;
+            box-shadow: none;
+            border-radius: 0.28571429rem;
+            text-align: left;
+            color: rgba(0,0,0,.87);
+            border-collapse: separate;
+            border-spacing: 0;"
+            >
+                <thead style="display: table-header-group;vertical-align: middle;border-color: inherit;">
+                <tr style="display: table-row;vertical-align: inherit;border-color: inherit;">
+                    {{ table.th('sylius.ui.product'|trans) }}
+                    {{ table.th('sylius.ui.variant'|trans) }}
+                    {{ table.th('sylius.ui.code'|trans) }}
+                    {{ table.th('sylius.ui.quantity'|trans) }}
+                </tr>
+                </thead>
+                <tbody style="display: table-row-group;vertical-align: middle;border-color: inherit;">
+                {% for item in quote.items %}
+                    <tr style="display: table-row;vertical-align: inherit;border-color: inherit;border-top: 1px solid rgba(34,36,38,.1);">
+                        {{ table.td(item.productName) }}
+                        {{ table.td(item.variantName) }}
+                        {{ table.td(item.variant.code) }}
+                        {{ table.td(item.quantity) }}
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

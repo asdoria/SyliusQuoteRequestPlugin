@@ -42,7 +42,8 @@ class QuoteSessionStorage implements QuoteSessionStorageInterface
 
             return $this->orderRepository->findOneBy([
                 'tokenValue' => $tokenValue,
-                'channel' => $channel
+                'channel'    => $channel,
+                'state'      => OrderInterface::STATE_CART
             ]);
         }
 

@@ -1,4 +1,4 @@
-asdoria_quote_request_shopping:
+asdoria_quote_request_shop:
     resource: "routes/shop.yaml"
     prefix: /{_locale}/quote-request
     requirements:
