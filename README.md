@@ -43,12 +43,24 @@ asdoria_quick_shopping:
     resource: "@AsdoriaSyliusQuickShoppingPlugin/Resources/config/routing.yaml"
 asdoria_quote_request:
     resource: "@AsdoriaSyliusQuoteRequestPlugin/config/routing.yaml"
+
+#if you don't want to use the quick sopping page added this route
+asdoria_shop_quick_shopping_index:
+    path: /{_locale}/quick-shopping
+    controller: Symfony\Bundle\FrameworkBundle\Controller\RedirectController::redirectAction
+    defaults:
+        route: asdoria_shop_quote_request_index
+        # make a permanent redirection...
+        permanent: true
+        # ...and keep the original query string parameters
+        keepQueryParams: true
 ```
 
 4. Import config in `config/packages/_sylius.yaml`
 ```yaml
 imports:
     - { resource: "@AsdoriaSyliusQuickShoppingPlugin/Resources/config/config.yaml"}
+    - { resource: "@AsdoriaSyliusQuoteRequestPlugin/Resources/config/config.yaml"}
 ```
 
 5. Paste the following content to the `src/Repository/ProductVariantRepository.php`:
@@ -81,11 +93,13 @@ imports:
 
 ## Demo
 
-You can try the QuickShopping plugin online by following this link: [here!](https://demo-sylius.asdoria.fr/en_US/quotation).
+You can try the QuickShopping plugin online by following this link: [here!](https://demo-sylius.asdoria.fr/en_US/quote-request).
 
 Note that we have developed several other open source plugins for Sylius, whose demos and documentation are listed on the [following page](https://asdoria.github.io/).
 
 ## Usage
 
-1. In the shop office, go to /en_US/quotation route.
+1. In the shop office, go to /en_US/quote-request route.
+
+
 
