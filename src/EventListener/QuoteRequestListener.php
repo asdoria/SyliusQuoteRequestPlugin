@@ -77,15 +77,13 @@ class QuoteRequestListener
 
         $this->emailSender->send(
             Emails::CONTACT_QUOTE_REQUEST,
-            $recipients,
+            [$data['email']],
             [
                 'data'       => $data,
                 'quote'      => $quote,
                 'localeCode' => $this->localeContext->getLocaleCode(),
                 'channel'    => $quote->getChannel()
-            ],
-            [],
-            [$data['email']],
+            ]
         );
     }
 
