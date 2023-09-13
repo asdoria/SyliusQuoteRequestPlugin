@@ -115,16 +115,20 @@ imports:
     {{ sylius_template_event('sylius.shop.product.show.add_to_cart_form', {'product': product, 'order_item': order_item, 'form': form}) }}
 
 -   <button type="submit" class="ui huge primary icon labeled button" {{ sylius_test_html_attribute('add-to-cart-button') }}><i class="cart icon"></i> {{ 'sylius.ui.add_to_cart'|trans }}</button>
-+   <button type="submit"
-+           id="asdoria-shop-quote-request-add-to-quote"
-+           data-action="{{ path('sylius_shop_ajax_quote_add_item', {'productId': product.id}) }}"
-+           class="ui huge primary icon labeled button" {{ sylius_test_html_attribute('add-to-quote-button') }}
-+           data-redirect="{{ path('asdoria_shop_quote_request_index') }}"
-+           data-csrf-token="{{ csrf_token('asdoria-shop-quote-request-add-to-quote') }}"
-+   >
-+       <i class="box icon"></i>
-+       {{ 'asdoria_quote_request.ui.shop.add_to_quote'|trans }}
-+   </button>    
++   <div class="ui buttons">
++       <button type="submit" class="ui huge primary icon labeled button" {{ sylius_test_html_attribute('add-to-cart-button') }}><i class="cart icon"></i> {{ 'sylius.ui.add_to_cart'|trans }}</button>
++       <div class="or" data-text="{{ 'asdoria_quote_request.ui.shop.or'|trans }}"></div>
++       <button type="submit"
++               id="asdoria-shop-quote-request-add-to-quote"
++               data-action="{{ path('sylius_shop_ajax_quote_add_item', {'productId': product.id}) }}"
++               class="ui huge primary icon labeled button" {{ sylius_test_html_attribute('add-to-quote-button') }}
++               data-redirect="{{ path('asdoria_shop_quote_request_index') }}"
++               data-csrf-token="{{ csrf_token('asdoria-shop-quote-request-add-to-quote') }}"
++       >
++           <i class="box icon"></i>
++           {{ 'asdoria_quote_request.ui.shop.add_to_quote'|trans }}
++       </button>
++    </div>
     {{ form_row(form._token) }}
     {{ form_end(form, {'render_rest': false}) }}
 </div>  
