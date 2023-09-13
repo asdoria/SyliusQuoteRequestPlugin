@@ -42,7 +42,7 @@ Asdoria\SyliusQuoteRequestPlugin\AsdoriaSyliusQuoteRequestPlugin::class => ['all
 asdoria_quick_shopping:
     resource: "@AsdoriaSyliusQuickShoppingPlugin/Resources/config/routing.yaml"
 asdoria_quote_request:
-    resource: "@AsdoriaSyliusQuoteRequestPlugin/config/routing.yaml"
+    resource: "@AsdoriaSyliusQuoteRequestPlugin/Resources/config/routing.yaml"
 
 #if you don't want to use the quick sopping page added this route
 asdoria_shop_quick_shopping_index:
