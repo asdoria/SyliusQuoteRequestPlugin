@@ -1,6 +1,7 @@
 <p align="center">
 </p>
 
+![Logo Asdoria](doc/asdoria.jpg)
 
 <h1 align="center">Asdoria QuoteRequest Plugin</h1>
 
@@ -13,8 +14,6 @@
 <div style="max-width: 75%; height: auto; margin: auto">
 
 ![Add to Cart](doc/addtoquote.gif)
-
-![Your shopping](doc/yourquote.png)
 
 </div>
 
