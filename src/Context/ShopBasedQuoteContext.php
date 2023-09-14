@@ -70,12 +70,6 @@ final class ShopBasedQuoteContext implements QuoteContextInterface, ResetInterfa
             throw new QuoteNotFoundException('Sylius was not able to prepare the quote.', $exception);
         }
 
-        /** @var CustomerInterface|null $customer */
-        $customer = $this->shopperContext->getCustomer();
-        if (null !== $customer) {
-            $this->setCustomerAndAddressOnQuote($quote, $customer);
-        }
-
         $this->quote = $quote;
 
         return $quote;
@@ -84,25 +78,6 @@ final class ShopBasedQuoteContext implements QuoteContextInterface, ResetInterfa
     public function reset(): void
     {
         $this->quote = null;
-    }
-
-    private function setCustomerAndAddressOnQuote(OrderInterface $quote, CustomerInterface $customer): void
-    {
-        $this->setCustomer($quote, $customer);
-
-        $defaultAddress = $customer->getDefaultAddress();
-        if (null !== $defaultAddress) {
-            $clonedAddress = clone $defaultAddress;
-            $clonedAddress->setCustomer(null);
-            $quote->setBillingAddress($clonedAddress);
-        }
-    }
-
-    private function setCustomer(OrderInterface $quote, CustomerInterface $customer): void
-    {
-        $clonedCustomer= clone $customer;
-        $clonedCustomer->setUser(null);
-        $quote->setCustomer($clonedCustomer);
     }
 
     public function getCart(): BaseOrderInterface

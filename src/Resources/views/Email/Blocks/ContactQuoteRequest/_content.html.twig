@@ -26,7 +26,6 @@
         <tr style="display: table-row;vertical-align: inherit;border-color: inherit;">
             {{ table.th('sylius.ui.product'|trans) }}
             {{ table.th('sylius.ui.variant'|trans) }}
-            {{ table.th('sylius.ui.code'|trans) }}
             {{ table.th('sylius.ui.quantity'|trans) }}
         </tr>
         </thead>
@@ -35,7 +34,6 @@
             <tr style="display: table-row;vertical-align: inherit;border-color: inherit;border-top: 1px solid rgba(34,36,38,.1);">
                 {{ table.td(item.productName) }}
                 {{ table.td(item.variantName) }}
-                {{ table.td(item.variant.code) }}
                 {{ table.td(item.quantity) }}
             </tr>
         {% endfor %}

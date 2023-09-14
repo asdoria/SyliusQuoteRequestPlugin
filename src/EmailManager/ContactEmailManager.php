@@ -5,8 +5,10 @@ namespace Asdoria\SyliusQuoteRequestPlugin\EmailManager;
 
 use Asdoria\SyliusQuoteRequestPlugin\Event\QuoteRequestEvent;
 use Asdoria\SyliusQuoteRequestPlugin\Event\QuoteRequestEventInterface;
+use Asdoria\SyliusQuoteRequestPlugin\Traits\QuoteSessionStorageTrait;
 use Psr\EventDispatcher\EventDispatcherInterface;
 use Sylius\Bundle\ShopBundle\EmailManager\ContactEmailManagerInterface;
+use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 
 /**
@@ -17,9 +19,11 @@ use Sylius\Component\Core\Model\ChannelInterface;
  */
 class ContactEmailManager implements ContactEmailManagerInterface
 {
+    use QuoteSessionStorageTrait;
     public function __construct(
         protected ContactEmailManagerInterface $inner,
-        protected EventDispatcherInterface $eventDispatcher
+        protected EventDispatcherInterface $eventDispatcher,
+        protected ChannelContextInterface $channelContext
     )
     {
     }
@@ -47,6 +51,10 @@ class ContactEmailManager implements ContactEmailManagerInterface
 
         if (!$event->isHasSent()){
             $this->inner->sendContactRequest($data, $recipients, $channel, $localeCode);
+        }
+        
+        if ($event->isHasSent()) {
+            $this->getQuoteSessionStorage()->removeForChannel($this->channelContext->getChannel());
         }
     }
 }

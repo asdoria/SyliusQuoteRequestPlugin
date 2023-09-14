@@ -8,6 +8,7 @@ use Asdoria\SyliusQuoteRequestPlugin\Event\QuoteRequestEventInterface;
 use Asdoria\SyliusQuoteRequestPlugin\Factory\Model\CustomerAfterQuoteRequestFactoryInterface;
 use Asdoria\SyliusQuoteRequestPlugin\Mailer\Emails;
 use Asdoria\SyliusQuoteRequestPlugin\Traits\QuoteContextTrait;
+use Asdoria\SyliusQuoteRequestPlugin\Traits\QuoteSessionStorageTrait;
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerAwareTrait;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -26,8 +27,6 @@ class QuoteRequestListener
 
     public function __construct(
         private SenderInterface                           $emailSender,
-        private CustomerAfterQuoteRequestFactoryInterface $customerAfterQuoteRequestFactory,
-        protected EntityManagerInterface                  $entityManager,
         protected LocaleContextInterface                  $localeContext
     )
     {
@@ -44,12 +43,6 @@ class QuoteRequestListener
         if ($quote->getTokenValue() !== $data['quoteTokenValue']) return;
 
         try {
-            $quote = $this->entityManager->wrapInTransaction(function (EntityManagerInterface $manager) use ($quote, $data) {
-                $quote->setCustomer($this->customerAfterQuoteRequestFactory->createAfterQuoteRequest($quote, $data));
-                $quote->setState(OrderInterface::STATE_CANCELLED);
-                return $quote;
-            });
-
             $this->sendContactQuoteRequest($quote, $data, $recipients);
             $this->sendAdminQuoteRequest($quote, $data, $recipients);
             $event->setHasSent(true);
@@ -72,9 +65,6 @@ class QuoteRequestListener
         array          $recipients
     ): void
     {
-
-        if (empty($quote->getChannel()->getContactEmail())) return;
-
         $this->emailSender->send(
             Emails::CONTACT_QUOTE_REQUEST,
             [$data['email']],
@@ -95,10 +85,10 @@ class QuoteRequestListener
      */
     protected function sendAdminQuoteRequest(
         OrderInterface $quote,
-        array          $data
+        array          $data,
+        array          $recipients
     ): void
     {
-
         if (empty($quote->getChannel()->getContactEmail())) return;
 
         $this->emailSender->send(

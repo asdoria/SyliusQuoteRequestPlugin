@@ -2,8 +2,6 @@ services:
     Asdoria\SyliusQuoteRequestPlugin\EventListener\QuoteRequestListener:
         arguments:
             $emailSender: "@sylius.email_sender"
-            $customerAfterQuoteRequestFactory: "@Asdoria\\SyliusQuoteRequestPlugin\\Factory\\CustomerAfterQuoteRequestFactory"
-            $entityManager: "@doctrine.orm.entity_manager"
             $localeContext: "@sylius.context.locale"
         calls:
             - [ setQuoteContext, ["@asdoria_quote_request.context.quote"]]
