@@ -13,7 +13,7 @@
 
 <div style="max-width: 75%; height: auto; margin: auto">
 
-![Add to Cart](doc/addtoquote.gif)
+![Add to Cart](doc/presentation.gif)
 
 </div>
 
