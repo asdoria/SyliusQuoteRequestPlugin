@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Asdoria\SyliusQuoteRequestPlugin\Traits;
 
-use Asdoria\SyliusQuoteRequestPlugin\Context\Model\QuoteContextInterface;
+use Asdoria\SyliusQuoteRequestPlugin\Context\QuoteContextInterface;
 
 /**
  * Class QuoteContextTrait

@@ -14,6 +14,7 @@ services:
             $validationGroups: '%asdoria_quote_request.form.type.order_item.validation_groups%'
         calls:
             - [ setQuoteContext, ['@asdoria_quote_request.context.quote']]
+            - [ setQuoteFormManager, ['@Asdoria\SyliusQuoteRequestPlugin\Manager\QuoteFormManager']]
                 
     Asdoria\SyliusQuoteRequestPlugin\Controller\Shop\AddToQuoteController:
         public: true

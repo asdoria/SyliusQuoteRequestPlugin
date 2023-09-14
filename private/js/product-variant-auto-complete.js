@@ -23,7 +23,7 @@ $.fn.extend({
       const loadForEditUrl    = element.data('load-edit-url');
       const menuElement       = element.find('div.menu');
       const container         = element.closest('.ui.stackable.grid').find('#details-container-variant');
-      initQuantityEventListener(el);
+
       element.dropdown({
         delay: {
           search: 250,
@@ -44,7 +44,7 @@ $.fn.extend({
               name: item[choiceName],
               value: item[choiceValue],
               image: item['image'],
-              price: item['price'],
+              // price: item['price'],
               slug: item['slug'],
             }));
             return {
@@ -58,7 +58,6 @@ $.fn.extend({
               menuElement.append((
                 $(`<div class="item" data-value="${item['value']}" data-slug="${item['slug']}">
                     <img class="ui avatar image" src="${item['image']}">
-                    <span class="description">${item['price']}</span>
                     <span class="text" >${item['name']}</span>
                   </div>`)
               ));
@@ -76,14 +75,11 @@ $.fn.extend({
           const quantity              = quantityInput.val();
           const row                   = $('<div>' + addedText + '</div>')
           const image                 = row.find('img.ui.avatar.image').attr('src');
-          const unitPriceAndCurrency  = row.find('span.description').html();
-          const unitPrice             = unitPriceAndCurrency.match('[+-]?[0-9]+([.][0-9]+)?([eE][+-]?[0-9]+)?').shift()
-          const currencySymbol        = unitPriceAndCurrency.replace(unitPrice, '')
 
           container.empty();
           container.append($('' +
-            '<div class="field" data-image="' + image + '" data-currency-symbol="' + currencySymbol + '" data-unit-price="' + unitPrice + '">' +
-              '<label>' + priceTrans + '</label>' +
+            '<div class="field" data-image="' + image + '" >' +
+            '<label>' + priceTrans + '</label>' +
             '</div>')
           )
         },
@@ -91,6 +87,37 @@ $.fn.extend({
           container.empty();
         }
       });
+      if (autocompleteValue.split(',').filter(String).length > 0) {
+        const menuElement = element.find('div.menu');
+
+        menuElement.api({
+          on: 'now',
+          method: 'GET',
+          url: loadForEditUrl,
+          beforeSend(settings) {
+            /* eslint-disable-next-line no-param-reassign */
+            settings.data[choiceValue] = autocompleteValue.split(',').filter(String);
+
+            return settings;
+          },
+          onSuccess(response) {
+            console.log('response', response);
+            response.forEach((item) => {
+              debugger;
+              menuElement.append(
+                $(`<div class="item" data-value="${item['code']}" data-slug="${item['slug']}">
+                    <img class="ui avatar image" src="${item['image']}">
+                    <span class="text" >${item['descriptor']}</span>
+                  </div>`)
+              );
+            });
+
+            element.dropdown('refresh');
+            element.dropdown('set selected', element.find('input.autocomplete').val().split(',').filter(String));
+            // element.dropdown('show');
+          },
+        });
+      }
     });
   },
 });

@@ -16,7 +16,7 @@ use Symfony\Component\Form\FormInterface;
  *
  * @author  Philippe Vesin <pve.asdoria@gmail.com>
  */
-class BulkAddToQuoteType extends BulkAddToCartType
+final class BulkAddToQuoteType extends BulkAddToCartType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {

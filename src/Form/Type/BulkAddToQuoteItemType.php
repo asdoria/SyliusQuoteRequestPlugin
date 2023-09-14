@@ -12,7 +12,7 @@ use Asdoria\SyliusQuickShoppingPlugin\Form\Type\BulkAddToCartItemType;
  *
  * @author  Philippe Vesin <pve.asdoria@gmail.com>
  */
-class BulkAddToQuoteItemType extends BulkAddToCartItemType
+final class BulkAddToQuoteItemType extends BulkAddToCartItemType
 {
     /**
      * {@inheritdoc}

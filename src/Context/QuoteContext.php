@@ -5,7 +5,7 @@ declare(strict_types=1);
 
 namespace Asdoria\SyliusQuoteRequestPlugin\Context;
 
-use Asdoria\SyliusQuoteRequestPlugin\Context\Model\QuoteContextInterface;
+use Asdoria\SyliusQuoteRequestPlugin\Context\QuoteContextInterface;
 use Sylius\Component\Order\Model\OrderInterface;
 use Sylius\Component\Order\Model\OrderInterface as BaseOrderInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;

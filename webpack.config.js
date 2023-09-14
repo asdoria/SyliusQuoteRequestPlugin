@@ -3,8 +3,8 @@ const path = require('path');
 const fs = require('fs');
 
 const basePath = path.resolve(__dirname, './');
-const assets_path = path.join(basePath, './src/Resources/private');
-const output_path = path.join(basePath, './src/Resources/public');
+const assets_path = path.join(basePath, './private');
+const output_path = path.join(basePath, './public');
 const public_path = 'bundles/asdoriasyliusquoterequestplugin';
 const js_path = path.join(assets_path, './js');
 const isProduction = Encore.isProduction();

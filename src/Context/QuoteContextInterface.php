@@ -2,15 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Asdoria\SyliusQuoteRequestPlugin\Context\Model;
+namespace Asdoria\SyliusQuoteRequestPlugin\Context;
 
 use Sylius\Component\Order\Context\CartContextInterface;
 use Sylius\Component\Order\Model\OrderInterface;
 
 /**
- * Class QuoteContextInterface
+ * Interface QuoteContextInterface
+ * @package Asdoria\SyliusQuoteRequestPlugin\Context
  *
- * @author Philippe Vesin <pve.asdoria@gmail.com>
+ * @author  Philippe Vesin <pve.asdoria@gmail.com>
  */
 interface QuoteContextInterface extends CartContextInterface
 {

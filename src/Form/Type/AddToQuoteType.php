@@ -16,10 +16,11 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * Class AddToQuoteType
+ * @package Asdoria\SyliusQuoteRequestPlugin\Form\Type
  *
- * @author Philippe Vesin <pve.asdoria@gmail.com>
+ * @author  Philippe Vesin <pve.asdoria@gmail.com>
  */
-class AddToQuoteType  extends AbstractResourceType
+final class AddToQuoteType  extends AbstractResourceType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {

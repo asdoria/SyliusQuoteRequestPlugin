@@ -7,7 +7,7 @@ asdoria_quote_request:
             sub_header: Add multiple products to quote
             add_to_quote: Add To Quote
             quote_add_item: Item has been added to quote
-            save_my_quote: Register my Quote
+            save_my_quote: Save
             confirm_my_quote: Validate my quote
             see_detail: See details
             contact_header: Your quotation

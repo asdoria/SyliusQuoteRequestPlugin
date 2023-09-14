@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Asdoria\SyliusQuoteRequestPlugin\Context;
 
-use Asdoria\SyliusQuoteRequestPlugin\Context\Model\QuoteContextInterface;
 use Asdoria\SyliusQuoteRequestPlugin\TokenAssigner\QuoteTokenAssignerInterface;
 use Asdoria\SyliusQuoteRequestPlugin\Traits\QuoteSessionStorageTrait;
 use Sylius\Component\Channel\Context\ChannelNotFoundException;

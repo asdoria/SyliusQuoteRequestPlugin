@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Asdoria\SyliusQuoteRequestPlugin\Controller\Shop;
 
-use Asdoria\SyliusQuickShoppingPlugin\Controller\Shop\BulkAddToCartCommandInterface;
 use Asdoria\SyliusQuickShoppingPlugin\Controller\Shop\QuickShoppingController;
 use Asdoria\SyliusQuoteRequestPlugin\Factory\Model\BulkAddToQuoteCommandFactoryInterface;
 use Asdoria\SyliusQuoteRequestPlugin\Form\Type\BulkAddToQuoteType;
 use Asdoria\SyliusQuoteRequestPlugin\Traits\QuoteContextTrait;
+use Asdoria\SyliusQuoteRequestPlugin\Traits\QuoteFormManagerTrait;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -27,6 +27,7 @@ use Twig\Error\SyntaxError;
 class QuoteController extends QuickShoppingController
 {
     use QuoteContextTrait;
+    use QuoteFormManagerTrait;
 
     /**
      * @param Request $request
@@ -52,22 +53,8 @@ class QuoteController extends QuickShoppingController
         );
 
         if ($request->isMethod('POST') && $form->handleRequest($request)->isValid() && $form->isSubmitted()) {
-            /** @var BulkAddToCartCommandInterface $bulkAddToQuoteCommand */
-            $bulkAddToQuoteCommand = $form->getData();
-            $quote                 = $bulkAddToQuoteCommand->getCart();
-
-            foreach ($quote->getItems() as $orderItem) {
-                $this->orderModifier->removeFromOrder($quote, $orderItem);
-            }
-
-            foreach ($form->get('cartItems') as $childForm) {
-                $addToQuoteCommand = $childForm->getData();
-                $errors            = $this->getCartItemErrors($addToQuoteCommand->getCartItem());
-                if (0 < count($errors)) {
-                    $this->getAddToCartFormWithErrors($errors, $childForm);
-                }
-                $this->orderModifier->addToOrder($addToQuoteCommand->getCart(), $addToQuoteCommand->getCartItem());
-            }
+            $this->getQuoteFormManager()
+                ->manage($form, $this->validationGroups);
 
             if ($form->getErrors(true, true)->count() == 0) {
                 $this->cartManager->persist($quote);

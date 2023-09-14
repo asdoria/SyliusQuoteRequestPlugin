@@ -1,0 +1,5 @@
+services:
+    Asdoria\SyliusQuoteRequestPlugin\Manager\QuoteFormManager:
+        arguments:
+            $orderModifier: '@sylius.order_modifier'
+            $validator: '@validator'
