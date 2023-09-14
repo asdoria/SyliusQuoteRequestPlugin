@@ -49,12 +49,11 @@ class ContactEmailManager implements ContactEmailManagerInterface
             'asdoria_quote_request.contact_email_manager.pre_send'
         );
 
-        if (!$event->isHasSent()){
-            $this->inner->sendContactRequest($data, $recipients, $channel, $localeCode);
-        }
-        
         if ($event->isHasSent()) {
             $this->getQuoteSessionStorage()->removeForChannel($this->channelContext->getChannel());
+            return;
         }
+
+        $this->inner->sendContactRequest($data, $recipients, $channel, $localeCode);
     }
 }
