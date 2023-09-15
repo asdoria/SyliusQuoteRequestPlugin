@@ -15,7 +15,7 @@ asdoria_quote_request:
         contact_quote_request:
             content: Content
             subject: Your quote request has been trans
-            number: Quotation number %reference%
+            number: Quotation number
         admin_quote_request:
             content: Content
             subject: A request for quotation has been sent to you
