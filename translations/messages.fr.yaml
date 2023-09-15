@@ -15,7 +15,7 @@ asdoria_quote_request:
         contact_quote_request:
             content: Contenu
             subject: Votre demande de devis a été transmise
-            number: Numéro de devis %reference%
+            number: Numéro de devis
         admin_quote_request:
             content: Contenu
             subject: Une demande de devis vous a été envoyée
