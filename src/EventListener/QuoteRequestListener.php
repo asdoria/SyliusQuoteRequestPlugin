@@ -40,7 +40,11 @@ class QuoteRequestListener
         /** @var OrderInterface $quote */
         $quote = $this->quoteContext->getQuote();
 
-        if ($quote->getTokenValue() !== $data['quoteTokenValue']) return;
+        if ($quote->isEmpty()) return;
+
+        $quoteTokenValue = $data['quoteTokenValue'] ?? null;
+
+        if ($quote->getTokenValue() !== $quoteTokenValue) return;
 
         try {
             $this->sendContactQuoteRequest($quote, $data, $recipients);

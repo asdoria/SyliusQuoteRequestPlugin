@@ -21,7 +21,7 @@ class ContactTypeExtension extends AbstractTypeExtension
      */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        if ($this->getQuoteContext()->getQuote()->getItems()->isEmpty()) return;
+        if ($this->getQuoteContext()->getQuote()->isEmpty()) return;
 
         $builder
             ->add('quoteTokenValue', HiddenType::class, [
